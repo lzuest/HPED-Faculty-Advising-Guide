@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HPED / PETE Advising Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #F0B323;
+  --gold-dark: #D49E1F;
+  --gold-light: #FFF8E1;
+  --gold-hover: #FFF0C0;
+  --black: #1A1A1A;
+  --white: #FFFFFF;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --alert-bg: #FFF3E0;
+  --alert-border: #FFB74D;
+  --note-bg: #E8F5E9;
+  --note-border: #81C784;
+  --info-bg: #E3F2FD;
+  --info-border: #64B5F6;
+  --sidebar-w: 300px;
+  --header-h: 64px;
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--black);
+  background: var(--gray-50);
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 100;
+  gap: 16px;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.header-logo .tu-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--gold);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--black);
+}
+.header-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.header-subtitle {
+  font-size: 12px;
+  color: var(--gray-500);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.header-search {
+  flex: 1;
+  max-width: 420px;
+  margin-left: auto;
+  position: relative;
+}
+.header-search input {
+  width: 100%;
+  padding: 8px 16px 8px 40px;
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  background: var(--gray-800);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.header-search input::placeholder { color: var(--gray-500); }
+.header-search input:focus {
+  border-color: var(--gold);
+  background: var(--black);
+}
+.header-search .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  font-size: 16px;
+  pointer-events: none;
+}
+.header-badge {
+  background: var(--gold);
+  color: var(--black);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--white);
+  border-right: 1px solid var(--gray-200);
+  overflow-y: auto;
+  padding: 20px 0;
+  z-index: 90;
+  transition: transform 0.3s ease;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 2px; }
+
+.nav-section {
+  padding: 0 16px;
+  margin-bottom: 4px;
+}
+.nav-link {
+  display: block;
+  padding: 8px 16px;
+  color: var(--gray-700);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+}
+.nav-link:hover {
+  background: var(--gold-hover);
+  color: var(--black);
+}
+.nav-link.active {
+  background: var(--gold-light);
+  color: var(--black);
+  font-weight: 600;
+  border-left-color: var(--gold);
+}
+.nav-link.sub {
+  padding-left: 32px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--gray-600);
+}
+.nav-link.sub:hover { color: var(--black); }
+.nav-link.sub.active { font-weight: 500; }
+
+.nav-divider {
+  height: 1px;
+  background: var(--gray-200);
+  margin: 12px 16px;
+}
+
+/* MAIN */
+.main {
+  margin-left: var(--sidebar-w);
+  margin-top: var(--header-h);
+  padding: 40px 48px 80px;
+  max-width: 860px;
+}
+
+/* CONTENT STYLES */
+.confidential-banner {
+  background: var(--alert-bg);
+  border: 1px solid var(--alert-border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 32px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+h1.section-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--black);
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--gold);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+h2.subsection-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 28px 0 14px;
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+h3.step-title {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin: 20px 0 8px;
+}
+
+p { margin-bottom: 12px; }
+
+ul, ol {
+  margin: 0 0 16px 20px;
+}
+li { margin-bottom: 6px; }
+
+/* TABLES */
+table.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 20px;
+  font-size: 14px;
+}
+table.info-table th {
+  background: var(--black);
+  color: var(--white);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+}
+table.info-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-200);
+}
+table.info-table tr:nth-child(even) td {
+  background: var(--gray-100);
+}
+table.info-table tr:hover td {
+  background: var(--gold-hover);
+}
+
+/* CALLOUT BOXES */
+.callout {
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.55;
+  border-left: 4px solid;
+}
+.callout.alert {
+  background: var(--alert-bg);
+  border-color: var(--alert-border);
+}
+.callout.note {
+  background: var(--note-bg);
+  border-color: var(--note-border);
+}
+.callout.info {
+  background: var(--info-bg);
+  border-color: var(--info-border);
+}
+.callout strong:first-child {
+  display: inline;
+}
+
+/* COLLAPSIBLE */
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 0;
+}
+.collapsible-header:hover h2 { color: var(--gold-dark); }
+.collapse-icon {
+  font-size: 12px;
+  color: var(--gray-500);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+.collapsible-header.open .collapse-icon { transform: rotate(90deg); }
+.collapsible-body {
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  max-height: 0;
+  opacity: 0;
+}
+.collapsible-body.open {
+  max-height: 5000px;
+  opacity: 1;
+}
+
+/* SEARCH HIGHLIGHT */
+.search-highlight {
+  background: var(--gold);
+  color: var(--black);
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+.search-hidden { display: none !important; }
+
+/* BACK TO TOP */
+.back-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--black);
+  color: var(--gold);
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+  z-index: 80;
+}
+.back-top:hover { transform: scale(1.1); }
+.back-top.visible { display: flex; }
+
+/* PRINT */
+@media print {
+  .sidebar, .header, .back-top, .menu-toggle { display: none !important; }
+  .main { margin: 0; padding: 20px; max-width: 100%; }
+  .collapsible-body { max-height: none !important; opacity: 1 !important; }
+}
+
+/* MOBILE */
+@media (max-width: 860px) {
+  .menu-toggle { display: block; }
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .main { margin-left: 0; padding: 24px 20px 60px; }
+  .header-search { max-width: 200px; }
+  .header-subtitle { display: none; }
+  .overlay {
+    display: none;
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 85;
+  }
+  .overlay.open { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
+  <div class="header-logo">
+    <div class="tu-mark">TU</div>
+    <div>
+      <div class="header-title">HPED / PETE Advising Guide</div>
+      <div class="header-subtitle">Department of Kinesiology</div>
+    </div>
+  </div>
+  <span class="header-badge">Internal Use Only</span>
+  <div class="header-search">
+    <span class="search-icon">⌕</span>
+    <input type="text" placeholder="Search the guide..." id="searchInput" oninput="handleSearch(this.value)">
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="nav-section">
+    <a class="nav-link" data-target="sec1" onclick="scrollToSection('sec1')">1. Program Status Overview</a>
+    <a class="nav-link" data-target="sec2" onclick="scrollToSection('sec2')">2. Quick Reference</a>
+    <a class="nav-link sub" data-target="sec2-contacts" onclick="scrollToSection('sec2-contacts')">Key Contacts</a>
+    <a class="nav-link sub" data-target="sec2-gpa" onclick="scrollToSection('sec2-gpa')">GPA Requirements</a>
+    <div class="nav-divider"></div>
+    <a class="nav-link" data-target="sec3" onclick="scrollToSection('sec3')">3. General Advising Notes</a>
+    <a class="nav-link" data-target="sec4" onclick="scrollToSection('sec4')">4. Advising HPED Students</a>
+    <a class="nav-link sub" data-target="sec4-curric" onclick="scrollToSection('sec4-curric')">Curriculum Notes</a>
+    <a class="nav-link sub" data-target="sec4-gate" onclick="scrollToSection('sec4-gate')">Gate Courses</a>
+    <a class="nav-link sub" data-target="sec4-final" onclick="scrollToSection('sec4-final')">Final Program Year</a>
+    <a class="nav-link" data-target="sec5" onclick="scrollToSection('sec5')">5. Advising PETE Students</a>
+    <a class="nav-link sub" data-target="sec5-curric" onclick="scrollToSection('sec5-curric')">PETE Curriculum Notes</a>
+    <a class="nav-link sub" data-target="sec5-dcp" onclick="scrollToSection('sec5-dcp')">Building DCPs</a>
+    <div class="nav-divider"></div>
+    <a class="nav-link" data-target="sec6" onclick="scrollToSection('sec6')">6. Course Exceptions & Waivers</a>
+    <a class="nav-link sub" data-target="sec6-pete" onclick="scrollToSection('sec6-pete')">PETE ↔ HPED Exceptions</a>
+    <a class="nav-link sub" data-target="sec6-hlth" onclick="scrollToSection('sec6-hlth')">Temporary HLTH Subs</a>
+    <a class="nav-link sub" data-target="sec6-transfer" onclick="scrollToSection('sec6-transfer')">Transfer Credit Exceptions</a>
+    <a class="nav-link sub" data-target="sec6-ay" onclick="scrollToSection('sec6-ay')">AY 2026–27 Practicum</a>
+    <a class="nav-link sub" data-target="sec6-waiver" onclick="scrollToSection('sec6-waiver')">Prerequisite Waivers</a>
+    <div class="nav-divider"></div>
+    <a class="nav-link" data-target="sec7" onclick="scrollToSection('sec7')">7. Professional Phase Admission</a>
+    <a class="nav-link sub" data-target="sec7-cond" onclick="scrollToSection('sec7-cond')">Conditional Admission</a>
+    <a class="nav-link sub" data-target="sec7-maint" onclick="scrollToSection('sec7-maint')">Maintaining Candidacy</a>
+    <a class="nav-link sub" data-target="sec7-advise" onclick="scrollToSection('sec7-advise')">Advising Conditional/Probation</a>
+    <a class="nav-link" data-target="sec8" onclick="scrollToSection('sec8')">8. Consent & Enrollment</a>
+    <a class="nav-link" data-target="sec9" onclick="scrollToSection('sec9')">9. Benefits & Talking Points</a>
+  </div>
+</nav>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="mainContent">
+
+  <div class="confidential-banner">
+    ⚠️ <strong>INTERNAL USE ONLY</strong> — This advising guide is for faculty and staff use only and should not be shared with students. Share only the curriculum sheet and degree audit form with students. This is a live document that is regularly updated.
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section" id="sec1">
+    <h1 class="section-title">1. Program Status Overview</h1>
+    <p><strong>HPED (Health &amp; Physical Education)</strong> is the active program offering dual licensure in Health and Physical Education. The PETE (Physical Education Teacher Education) program is being phased out. No new students are being admitted to PETE.</p>
+    <p><strong>Advisors are currently working with two student populations:</strong></p>
+    <ul>
+      <li><strong>HPED students</strong> — all incoming and continuing students in the active program</li>
+      <li><strong>PETE students (phase-out)</strong> — remaining students being matriculated through the PETE curriculum to completion</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section" id="sec2">
+    <h1 class="section-title">2. Quick Reference</h1>
+    <h2 class="subsection-title" id="sec2-contacts">Key Contacts for Enrollment Issues</h2>
+    <table class="info-table">
+      <thead><tr><th>Course / Issue</th><th>Contact</th><th>Email / Phone</th></tr></thead>
+      <tbody>
+        <tr><td>BIOL 220 enrollment</td><td>Dept. of Biological Sciences</td><td>biolsci@towson.edu / 410-704-3042</td></tr>
+        <tr><td>ELED 324 enrollment</td><td>Dept. of Elementary Education</td><td>tcotton@towson.edu / 410-704-2176</td></tr>
+        <tr><td>KNES/HPED courses</td><td>Dept. of Kinesiology</td><td>ccamm@towson.edu / 410-704-5857</td></tr>
+        <tr><td>Prerequisite waivers / Exceptions</td><td>Program Coordinator or Corinne</td><td>Include student name &amp; ID</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="subsection-title" id="sec2-gpa">GPA Requirements at a Glance</h2>
+    <ul>
+      <li><strong>Professional phase admission:</strong> minimum 3.0 GPA (calculated from past two years of coursework)</li>
+      <li><strong>Conditional admission:</strong> GPA between 2.5–2.99 (see <a href="#sec7-cond" onclick="scrollToSection('sec7-cond')">Section 7</a> for conditions)</li>
+      <li><strong>Maintaining candidacy:</strong> 3.0 semester GPA each semester once admitted</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section" id="sec3">
+    <h1 class="section-title">3. General Advising Notes (All Students)</h1>
+    <ul>
+      <li><strong>After meeting with a student, enter a brief advising note in SSC</strong> summarizing recommendations, options reviewed, and student decisions.</li>
+      <li><strong>All students must have a Degree Completion Plan (DCP) in SSC</strong> before an advising hold can be removed.</li>
+      <li><strong>All students (PETE &amp; HPED) must take KNES 312 — Fundamentals of Exercise Physiology and Biomechanics</strong> (not KNES 313).</li>
+      <li>Meet with every student before removing the advising hold.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section" id="sec4">
+    <h1 class="section-title">4. Advising HPED Students</h1>
+
+    <div class="collapsible">
+      <div class="collapsible-header open" onclick="toggleCollapse(this)" id="sec4-curric">
+        <span class="collapse-icon">▶</span>
+        <h2 class="subsection-title" style="margin:0">Curriculum Notes</h2>
+      </div>
+      <div class="collapsible-body open">
+        <ul>
+          <li><strong>KNES 311 — Biomechanics is not required</strong> for HPED majors.</li>
+          <li>HPED majors may take any approved math course that fulfills their Core 3 Math requirement.</li>
+          <li><strong>BIOL 220/L — Anatomy and Physiology</strong> replaces BIOL 221/L plus BIOL 222/L (8 credits total). If an HPED student has already completed BIOL 221/L, they must still complete either BIOL 222/L or BIOL 220/L (BIOL 220/L is typically the easier single-course option).</li>
+          <li><strong>BIOL 191 — Introduction to Biology for Health Professions</strong> has a math prerequisite: MATH 102 (taken concurrently with BIOL 191L), or a grade of C (2.0) or higher in MATH 100, or a score of 30 or higher on ALEKS.</li>
+          <li><strong>Core 8 course:</strong> If not already satisfied, guide students to a 3-credit course from: ANTH 212, BIOL 105, CHEM 100, GEOG 101, GEOL 109, PHYS 100, or PHYS 103.</li>
+          <li><strong>DANC 106 — Fundamentals of Dance Movement or KNES 244 — Pedagogy in Creative Movement and Gymnastics Skills and Strategies:</strong> While KNES 244 is still offered, HPED students may choose either course.</li>
+        </ul>
+        <div class="callout alert">
+          <strong>⚠️ Core 4 Requirement:</strong> DANC 106 fulfills the Core 4 (Arts) requirement. If a student takes KNES 244 instead of DANC 106, they must take an additional course to fulfill Core 4.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="subsection-title" id="sec4-gate">Professional Phase Gate Courses (Practicum I Courses)</h2>
+    <p>HPED students must have a minimum 3.0 GPA (past two years) to enroll in <strong>HPED 302 — Drug Use &amp; Personal Safety Education (HE Practicum I)</strong> or <strong>KNES 317 — Motor Behavior in Physical Education (PE Practicum I)</strong> and to be admitted to the professional phase.</p>
+
+    <h2 class="subsection-title" id="sec4-final">Final Program Year (HPED)</h2>
+    <div class="callout alert">
+      <strong>⚠️ Final Program Year:</strong> The final year is primarily full-time student teaching.<br><br>
+      <strong>Methods semester (Fall, Year 4):</strong> HPED 402 — Methods in Health Education (6 cr.) and HPED 403 — Methods in Physical Education (6 cr.), with practicum placements 3 days per week.<br><br>
+      <strong>Capstone semester (Spring, Year 4):</strong> HPED 481 — Capstone Internship and Seminar in HPE (12 cr.), with student teaching 5 days per week.<br><br>
+      Advise students that outside work and other commitments will be very difficult to manage during this time.
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section" id="sec5">
+    <h1 class="section-title">5. Advising PETE Students (Phase-Out)</h1>
+    <p>The PETE program is no longer accepting new students. Remaining PETE students are being advised through to program completion. As PETE courses are phased out, students may need to take HPED courses to fulfill requirements using the substitution list in <a href="#sec6" onclick="scrollToSection('sec6')">Section 6</a>.</p>
+
+    <div class="collapsible">
+      <div class="collapsible-header open" onclick="toggleCollapse(this)" id="sec5-curric">
+        <span class="collapse-icon">▶</span>
+        <h2 class="subsection-title" style="margin:0">PETE-Specific Curriculum Notes</h2>
+      </div>
+      <div class="collapsible-body open">
+        <ul>
+          <li><strong>KNES 311 — Biomechanics is required</strong> for PETE majors.</li>
+          <li><strong>Prerequisites for KNES 311:</strong> a college-level algebra course (MATH 115, 119, 211, or 273) OR a qualifying placement test score (≥ 20 on BAT or > 60 on ALEKS).</li>
+        </ul>
+        <div class="callout alert">⚠️ Even if a PETE student has already met the Core 3 Math requirement, they must still complete one of the listed math courses (or have a qualifying placement score) to meet the KNES 311 prerequisite.</div>
+        <ul>
+          <li><strong>PETE students must complete BIOL 221/L — Human Anatomy &amp; Physiology and BIOL 222/L — Human Anatomy &amp; Physiology II</strong> (BIOL 220/L does not apply to PETE).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="subsection-title">Professional Phase Gate Course (PETE)</h2>
+    <p>PETE students must have a minimum 3.0 GPA (past two years) to enroll in <strong>KNES 324 — Teaching Physical Education in Elementary School</strong> and to be admitted to the professional phase.</p>
+
+    <h2 class="subsection-title" id="sec5-dcp">Building DCPs for PETE Students</h2>
+    <p>As PETE courses are discontinued, advisors should use the substitution list to map remaining PETE students into available HPED courses. When building a DCP:</p>
+    <ol>
+      <li>Conduct a degree audit using the PETE curriculum and note which PETE courses remain available.</li>
+      <li>Apply substitutions from the tables in Section 6 for any PETE courses that are no longer offered.</li>
+      <li>Build or update the Degree Completion Plan in SSC.</li>
+      <li>Meet with the student to review the plan before removing the advising hold.</li>
+      <li><strong>Report substitutions at end of semester:</strong> Contact the Program Coordinator or Corinne so substitutions can be entered into the system (see Section 6).</li>
+    </ol>
+    <div class="callout alert">⚠️ Students who have already started internship classes (KNES 324 — Teaching Physical Education in Elementary School, KNES 325 — Teaching Physical Education in Secondary School, KNES 423 — Adapted Physical Education) should continue in the PETE pathway.</div>
+    <div class="callout info">📌 <strong>Conditional admission &amp; probation:</strong> For guidance on advising PETE students who are conditionally admitted or on probationary status, see <a href="#sec7-advise" onclick="scrollToSection('sec7-advise')">Section 7</a>. The same advising steps apply to both HPED and PETE students.</div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section" id="sec6">
+    <h1 class="section-title">6. Course Exceptions &amp; Prerequisite Waivers</h1>
+
+    <div class="collapsible">
+      <div class="collapsible-header open" onclick="toggleCollapse(this)" id="sec6-pete">
+        <span class="collapse-icon">▶</span>
+        <h2 class="subsection-title" style="margin:0">PETE ↔ HPED Course Exceptions</h2>
+      </div>
+      <div class="collapsible-body open">
+        <p>The following exceptions (substitutions) apply when PETE students need to take HPED courses (as PETE courses are phased out) or when former PETE students in the HPED program need credit for previously completed PETE courses.</p>
+        <table class="info-table">
+          <thead><tr><th>HPED Course</th><th>PETE Equivalent</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HPED 201</strong> — Foundations of Child and Adolescent Wellbeing</td><td><strong>KNES 294</strong> — Physical Education Elementary Content Knowledge and Performance</td></tr>
+            <tr><td><strong>HPED 293</strong> — Introduction to Health &amp; Physical Education</td><td><strong>KNES 292</strong> — Physical Education Teacher Education as a Profession</td></tr>
+            <tr><td><strong>HPED 303</strong> — Pedagogy in Field &amp; Court &amp; Net/Wall Skills and Strategies</td><td><strong>KNES 240</strong> — Pedagogy in Field/Court Skills and Strategy OR <strong>KNES 246</strong> — Pedagogy of Net/Wall Skills &amp; Strategies</td></tr>
+            <tr><td><strong>HPED 403</strong> — Methods in Physical Education (6 cr.)</td><td><strong>KNES 324</strong> — Teaching PE in Elementary School PLUS <strong>KNES 325</strong> — Teaching PE in Secondary School (6 cr. combined)</td></tr>
+            <tr><td><strong>DANC 106</strong> — Fundamentals of Dance Movement</td><td><strong>KNES 244</strong> — Pedagogy in Creative Movement and Gymnastics Skills and Strategies</td></tr>
+          </tbody>
+        </table>
+        <div class="callout note">📌 <strong>Additional substitution:</strong> HPED students may receive credit for KNES 284 — Adventure Based Education Activities (1 cr.) if they previously completed KNES 249 — Pedagogy in Track &amp; Field Skills and Strategy, and Adventure Education (3 cr.). This exception cannot be applied in reverse due to the credit hour discrepancy.</div>
+      </div>
+    </div>
+
+    <div class="collapsible">
+      <div class="collapsible-header open" onclick="toggleCollapse(this)" id="sec6-hlth">
+        <span class="collapse-icon">▶</span>
+        <h2 class="subsection-title" style="margin:0">Temporary HLTH Course Substitutions (Transition Period)</h2>
+      </div>
+      <div class="collapsible-body open">
+        <p>In limited cases, HPED students may enroll in Health Sciences (HLTH) courses when an HPED course is not offered in a given term. These substitutions are temporary and intended only for transition periods. This flexibility does not apply when an HPED course is offered but conflicts with a student's schedule. These substitutions also apply to transfer students—review their transfer credits carefully.</p>
+        <table class="info-table">
+          <thead><tr><th>HPED Course</th><th>HLTH Substitution (When HPED Not Offered)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HPED 202</strong> — Food and Nutrition Education</td><td><strong>HLTH 331</strong> — Nutrition for Health Professionals</td></tr>
+            <tr><td><strong>HPED 301</strong> — Sex &amp; Relationships Education</td><td><strong>HLTH 220</strong> — Sexuality in a Diverse Society</td></tr>
+            <tr><td><strong>HPED 401</strong> — Mental Health Education</td><td><strong>HLTH 208</strong> — Mental Health, Stress Management, and Crisis Intervention</td></tr>
+          </tbody>
+        </table>
+        <div class="callout note">📌 <strong>Important — Processing Substitutions:</strong> When an advisor maps out a student's program using any substitutions (exceptions) listed above—they must contact the Program Coordinator or Corinne at the end of the semester so the substitution can be entered into the system. Without this step, the substitution will not reflect the student's record.</div>
+      </div>
+    </div>
+
+    <h2 class="subsection-title" id="sec6-transfer">Transfer Credit Exceptions</h2>
+    <p>When reviewing transferred courses and requesting exceptions, advisors must email the Program Coordinator (Luciana) or Corinne with the following information:</p>
+    <ul>
+      <li>Student name and ID</li>
+      <li>Required course (the HPED/KNES course being fulfilled)</li>
+      <li>Transferred course (the course being used to request the exception)</li>
+    </ul>
+    <div class="callout alert" style="background:#FFF3E0; border-color:#E65100;">
+      <strong>⚠️ Once you receive email confirmation that the exception was processed, complete the provided form and upload it to SSC.</strong> Without this step, the exception will not be properly documented in the student's record.
+    </div>
+
+    <div class="collapsible">
+      <div class="collapsible-header open" onclick="toggleCollapse(this)" id="sec6-ay">
+        <span class="collapse-icon">▶</span>
+        <h2 class="subsection-title" style="margin:0">AY 2026–27 Practicum Exceptions (Temporary)</h2>
+      </div>
+      <div class="collapsible-body open">
+        <p>The following exceptions apply to <strong>AY 2026–27 only</strong> to allow HPED students to stay on track with their DCPs while practicum-embedded versions of courses are being phased in.</p>
+        <p><strong>Background:</strong> HPED 302 — Drug Use &amp; Personal Safety Education with HE Practicum I will begin being offered in Fall 2027. The PE Practicum I version of KNES 317 — Motor Behavior in Physical Education will begin being offered in Spring 2027.</p>
+        <p><strong>Approved exceptions for AY 2026–27:</strong></p>
+        <ul>
+          <li><strong>KNES 317 — Motor Behavior in Physical Education:</strong> Students may take KNES 317 (Spring only) without the practicum component.</li>
+          <li><strong>In place of HPED 302 — Drug Use &amp; Personal Safety Education:</strong> Students may take HLTH 405 — Drugs in Our Culture (offered Fall and Spring). Note: HLTH 101 — Wellness for a Diverse Society is a prerequisite for HLTH 405.</li>
+          <li><strong>In place of KNES 423 — Adapted Physical Education (without practicum):</strong> HPED students who need this course without the practicum may take SPED 301 (offered all terms). Note: KNES 423 will continue to be offered with a practicum for PETE students only through AY 2026–27.</li>
+        </ul>
+        <div class="callout note">📌 <strong>Reporting requirement:</strong> Once a student completes any of these substitution courses, the advisor must email the Program Coordinator or Corinne so the necessary exceptions can be requested. Without this step, the exception will not be reflected on the student's record.</div>
+      </div>
+    </div>
+
+    <h2 class="subsection-title" id="sec6-waiver">Prerequisite Waivers</h2>
+    <p>During the program transition, HPED course prerequisites may be waived (e.g., HPED 201 as a prerequisite to HPED 202) to allow concurrent enrollment or to keep students on track for graduation. This waiver policy applies to HPED transition cohorts only and may be discontinued in future advising cycles.</p>
+    <ul>
+      <li><strong>To request a waiver:</strong> email the Program Coordinator or Corinne with the student's name and ID.</li>
+      <li><strong>Exception:</strong> Prerequisites tied to professional program admission (for KNES 317 — Motor Behavior in Physical Education and HPED 302 — Drug Use &amp; Personal Safety Education) cannot be waived.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="section" id="sec7">
+    <h1 class="section-title">7. Professional Phase Admission</h1>
+    <p>Both PETE and HPED programs adhere to requirements established by the Teacher Education Executive Board. Consult the <em>Standards for Teacher Education Programs</em> (Towson catalog) and the Maryland Teacher EPP <em>Basic Skills Assessment</em> for detailed information.</p>
+
+    <h2 class="subsection-title" id="sec7-cond">Conditional Admission (GPA 2.5–2.99)</h2>
+    <p>Students with a two-year GPA between 2.5 and 2.99 may be conditionally accepted into the professional phase. This means they can begin professional-phase coursework, but they are not yet fully admitted. They have one semester—the conditional semester—to meet one of the following conditions:</p>
+    <ul>
+      <li><strong>Option 1:</strong> Pass the Praxis I exam during the conditional semester.</li>
+      <li><strong>Option 2:</strong> Raise their past-two-years GPA to 3.0 by the end of the conditional semester. Because the conditional semester's grades are included in the two-year GPA calculation, strong performance in that semester can bring the cumulative figure to 3.0.</li>
+    </ul>
+    <div class="callout alert">
+      <strong>⚠️ Key point:</strong> The "first semester in the professional phase" and the "conditional semester" are the same semester. Students have that one semester to either pass Praxis I or raise their past-two-years GPA to 3.0 (including that semester's grades in the calculation). If neither condition is met, the student will not be fully admitted. Students who are not admitted may reapply at any point once they meet the admission requirements.
+    </div>
+    <p>Students may apply for an exemption, but the College of Education (COE) can approve up to 10% of such requests. This should be discussed as a possibility but not relied upon as a plan.</p>
+
+    <h2 class="subsection-title" id="sec7-maint">Maintaining Candidacy (Semester GPA Requirement)</h2>
+    <p>Once fully admitted to the Teacher Education Program, candidates must maintain a <strong>3.0 semester GPA each semester</strong>. This is not a cumulative GPA—it is the GPA earned in that individual semester. A student could have a strong cumulative GPA but still fall below the threshold if one semester's grades are low.</p>
+    <p>At the department's discretion, candidates who fall below a 3.0 semester GPA may continue for one additional semester under probationary status; however, they must achieve a 3.0 semester GPA by the end of the probationary period. Candidates who do not meet this requirement will be dismissed from the program.</p>
+    <p>A candidate may reapply once a 3.0 semester GPA has been obtained during a subsequent spring or fall semester, but must meet all admission criteria to be readmitted.</p>
+
+    <h2 class="subsection-title" id="sec7-advise">Advising Students Who Are Conditionally Admitted or on Probation</h2>
+    <p>The guidance below applies to <strong>both HPED and PETE students</strong>. These students need clear communication about their status, the specific numbers they need to hit, and a concrete plan to get there.</p>
+
+    <h3 class="step-title">Step 1: Explain the Situation Clearly</h3>
+    <ul>
+      <li><strong>For conditionally admitted students:</strong> Explain that they have this one semester to either pass Praxis I or bring their past-two-years GPA to 3.0 (with this semester's grades included). Make sure they understand both options.</li>
+      <li><strong>For probationary students:</strong> Be direct: they must earn a 3.0 semester GPA this semester or they will be dismissed from the program. Make sure they understand this is the semester GPA—the GPA calculated from only this semester's courses—not their cumulative GPA.</li>
+    </ul>
+
+    <h3 class="step-title">Step 2: Do the Math Together</h3>
+    <p>Help the student calculate exactly what grades they need. This depends on how many credits they are taking and the grade points each course contributes.</p>
+    <div class="callout info">
+      <strong>Planning with the TU GPA Calculator:</strong> Use the <a href="https://www.towson.edu/registrar/registration/calculator.html" target="_blank">Towson University GPA Calculator</a> to run scenarios with the student. Enter only the current semester's courses (not cumulative) to project what grades the student needs to achieve a 3.0 semester GPA.
+    </div>
+
+    <h3 class="step-title">Step 3: Build a Plan</h3>
+    <ul>
+      <li>Identify which courses the student feels most and least confident in.</li>
+      <li>Discuss study strategies, tutoring resources, faculty office hours, the Writing Center, or academic coaching.</li>
+      <li>If the student is managing work or personal challenges, consider a referral to the Counseling Center.</li>
+      <li>For conditionally admitted students pursuing the Praxis I path, help them identify preparation resources and a realistic test date within the semester.</li>
+    </ul>
+
+    <h3 class="step-title">Step 4: Set Check-Ins and Document</h3>
+    <ul>
+      <li>Encourage the student to meet with their advisor at least once mid-semester to assess progress.</li>
+      <li>Enter an advising note in SSC outlining the student's status (conditional or probationary), the plan developed, resources recommended, and any agreed-upon follow-up dates.</li>
+    </ul>
+
+    <h3 class="step-title">Step 5: Discuss What Happens If They Fall Short</h3>
+    <ul>
+      <li><strong>Conditional students:</strong> If neither condition is met, they will not be fully admitted to the professional phase. They may reapply at any point once they meet the admission requirements.</li>
+      <li><strong>Probationary students:</strong> If they do not achieve a 3.0 semester GPA, they will be dismissed. They may reapply once a 3.0 semester GPA has been obtained in a subsequent fall or spring semester, provided all admission criteria are met.</li>
+      <li><strong>Exemption:</strong> Students may apply for an exemption, but the COE can approve up to 10% of such requests. Discuss this as a possibility, not a plan.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="section" id="sec8">
+    <h1 class="section-title">8. Departmental Consent &amp; Enrollment</h1>
+    <p>Some courses require departmental consent for enrollment. Students who attempt to register without permission may receive an enrollment error. Remind students to include in their request:</p>
+    <ul>
+      <li>Full name</li>
+      <li>TU ID number</li>
+      <li>Major</li>
+      <li>Course and section number</li>
+    </ul>
+    <p>See the Quick Reference table in <a href="#sec2-contacts" onclick="scrollToSection('sec2-contacts')">Section 2</a> for specific department contacts.</p>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="section" id="sec9">
+    <h1 class="section-title">9. Program Benefits &amp; Talking Points</h1>
+    <p>Use these points when advising prospective and current students:</p>
+    <ul>
+      <li><strong>Dual licensure</strong> = broader job eligibility and more employment opportunities</li>
+      <li><strong>Strong job placement and stability</strong> in PK–12 settings (often close to home or desired location)</li>
+      <li>Job security is especially valuable in times of economic uncertainty</li>
+      <li>More class offerings and scheduling flexibility</li>
+      <li><strong>Coursework efficiencies:</strong> only KNES 312 (not 311 + 313); only one A&amp;P course required if none taken yet</li>
+      <li><strong>Quality of life:</strong> excellent benefits (health insurance, retirement), summers off, family-friendly schedule</li>
+      <li><strong>Transfer student advantage:</strong> nearly all graduates secure jobs; clear licensure pathway compared to other majors</li>
+      <li><strong>Growth opportunities:</strong> master's degree = higher salary potential</li>
+      <li>Additional career pathways: health, wellness, fitness, coaching, personal training</li>
+    </ul>
+  </div>
+
+</main>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Sidebar toggle (mobile)
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+
+// Scroll to section
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Close mobile sidebar
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
+
+// Collapsible sections
+function toggleCollapse(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// Active nav tracking
+const sections = document.querySelectorAll('.section, .subsection-title, .collapsible-header');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function updateActiveNav() {
+  const scrollPos = window.scrollY + 100;
+  let current = '';
+
+  document.querySelectorAll('[id]').forEach(el => {
+    if (el.offsetTop <= scrollPos + 20) {
+      if (el.id.startsWith('sec')) current = el.id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.dataset.target === current) link.classList.add('active');
+  });
+}
+
+window.addEventListener('scroll', () => {
+  updateActiveNav();
+  const btn = document.getElementById('backTop');
+  btn.classList.toggle('visible', window.scrollY > 400);
+});
+updateActiveNav();
+
+// Search
+function handleSearch(query) {
+  const q = query.toLowerCase().trim();
+  const allSections = document.querySelectorAll('.section');
+
+  // Clear previous highlights
+  document.querySelectorAll('.search-highlight').forEach(el => {
+    el.replaceWith(document.createTextNode(el.textContent));
+  });
+
+  if (!q) {
+    allSections.forEach(s => s.classList.remove('search-hidden'));
+    // Re-normalize text nodes
+    allSections.forEach(s => s.normalize());
+    return;
+  }
+
+  allSections.forEach(section => {
+    const text = section.textContent.toLowerCase();
+    if (text.includes(q)) {
+      section.classList.remove('search-hidden');
+      // Open any collapsed sections within
+      section.querySelectorAll('.collapsible-body:not(.open)').forEach(body => {
+        body.classList.add('open');
+        body.previousElementSibling.classList.add('open');
+      });
+    } else {
+      section.classList.add('search-hidden');
+    }
+  });
+}
+
+// Keyboard shortcut for search
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+});
+</script>
+</body>
+</html>
